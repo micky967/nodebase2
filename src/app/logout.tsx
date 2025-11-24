@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 export const LogoutButton = () => {
     const router = useRouter();
     return (
-        <Button onClick={() => authClient.signOut({
+        <Button className='text-lg' onClick={() => authClient.signOut({
             fetchOptions: {
                 onSuccess: () => {
                     router.push('/login');

@@ -81,7 +81,7 @@ export function RegisterForm() {
       <div className="flex flex-col gap-6">
         <Card>
           <CardHeader className="text-center">
-            <CardTitle>Get started!</CardTitle>
+            <CardTitle className="text-2xl font-semibold">Get started!</CardTitle>
             <CardDescription>Create an account to continue</CardDescription>
           </CardHeader>
           <CardContent>
@@ -95,6 +95,7 @@ export function RegisterForm() {
                       type="button"
                       disabled={isPending}
                     >
+                      <Image src="/logos/github.svg" alt="Github" width={16} height={16} className="mr-2" />
                       Continue with Github
                     </Button>
                     <Button
@@ -103,6 +104,7 @@ export function RegisterForm() {
                       type="button"
                       disabled={isPending}
                     >
+                      <Image src="/logos/google.svg" alt="Google" width={16} height={16} className="mr-2" />
                       Continue with Google
                     </Button>
                   </div>
@@ -161,7 +163,7 @@ export function RegisterForm() {
                     />
                     <Button
                       type="submit"
-                      className="w-full"
+                      className="w-full mt-8"
                       disabled={isPending}
                     >
                       Register

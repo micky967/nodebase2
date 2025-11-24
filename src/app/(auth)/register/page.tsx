@@ -7,7 +7,7 @@ const RegisterPage = async () => {
     await requireUnauth();
     
     return ( 
-        <div className="text-3xl">
+        <div>
             <RegisterForm />
         </div>
      );
