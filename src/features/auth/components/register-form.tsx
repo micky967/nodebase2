@@ -81,7 +81,23 @@ export function RegisterForm() {
       <div className="flex flex-col gap-6">
         <Card>
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-semibold">Get started!</CardTitle>
+            <CardTitle className=" font-semibold text-lg font-bold">
+              <Link
+                href="/"
+                className="flex items-center justify-center gap-2 self-center font-medium"
+              >
+                <Image
+                  src="/logos/logo.svg"
+                  alt="Nodebase2"
+                  width={30}
+                  height={30}
+                />
+                Nodebase 2
+              </Link>
+            </CardTitle>
+            <CardTitle className="text-2xl font-semibold">
+              Get started!
+            </CardTitle>
             <CardDescription>Create an account to continue</CardDescription>
           </CardHeader>
           <CardContent>
@@ -95,7 +111,13 @@ export function RegisterForm() {
                       type="button"
                       disabled={isPending}
                     >
-                      <Image src="/logos/github.svg" alt="Github" width={16} height={16} className="mr-2" />
+                      <Image
+                        src="/logos/github.svg"
+                        alt="Github"
+                        width={16}
+                        height={16}
+                        className="mr-2"
+                      />
                       Continue with Github
                     </Button>
                     <Button
@@ -104,7 +126,13 @@ export function RegisterForm() {
                       type="button"
                       disabled={isPending}
                     >
-                      <Image src="/logos/google.svg" alt="Google" width={16} height={16} className="mr-2" />
+                      <Image
+                        src="/logos/google.svg"
+                        alt="Google"
+                        width={16}
+                        height={16}
+                        className="mr-2"
+                      />
                       Continue with Google
                     </Button>
                   </div>
@@ -170,7 +198,7 @@ export function RegisterForm() {
                     </Button>
                   </div>
                   <div className="text-center text-sm">
-                    Already have an account? {" "}
+                    Already have an account?{" "}
                     <Link
                       href="/login"
                       className="text-primary underline underline-offset-4 text-sky-500 hover:text-sky-400"

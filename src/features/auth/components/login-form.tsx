@@ -70,7 +70,23 @@ export function LoginForm() {
     <div className="flex flex-col gap-6">
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-semibold">Welcome back!</CardTitle>
+          <CardTitle className=" font-semibold text-lg font-bold">
+            <Link
+              href="/"
+              className="flex items-center justify-center gap-2 self-center font-medium"
+            >
+              <Image
+                src="/logos/logo.svg"
+                alt="Nodebase2"
+                width={30}
+                height={30}
+              />
+              Nodebase 2
+            </Link>
+          </CardTitle>
+          <CardTitle className="text-2xl font-semibold">
+            Welcome back!
+          </CardTitle>
           <CardDescription>Login to continue</CardDescription>
         </CardHeader>
         <CardContent>
@@ -84,7 +100,13 @@ export function LoginForm() {
                     type="button"
                     disabled={isPending}
                   >
-                    <Image src="/logos/github.svg" alt="Github" width={16} height={16} className="mr-2" />
+                    <Image
+                      src="/logos/github.svg"
+                      alt="Github"
+                      width={16}
+                      height={16}
+                      className="mr-2"
+                    />
                     Continue with Github
                   </Button>
                   <Button
@@ -93,7 +115,13 @@ export function LoginForm() {
                     type="button"
                     disabled={isPending}
                   >
-                    <Image src="/logos/google.svg" alt="Google" width={16} height={16} className="mr-2" />
+                    <Image
+                      src="/logos/google.svg"
+                      alt="Google"
+                      width={16}
+                      height={16}
+                      className="mr-2"
+                    />
                     Continue with Google
                   </Button>
                 </div>
@@ -129,7 +157,11 @@ export function LoginForm() {
                       </FormItem>
                     )}
                   />
-                  <Button type="submit" className="w-full mt-8" disabled={isPending}>
+                  <Button
+                    type="submit"
+                    className="w-full mt-8"
+                    disabled={isPending}
+                  >
                     Login
                   </Button>
                 </div>
