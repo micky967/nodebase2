@@ -1,23 +1,46 @@
-import prisma from "@/lib/db";
-import { inngest } from "@/inngest/client";
 
-export const helloWorld = inngest.createFunction(
-  { id: "hello-world" },
-  { event: "test/hello.world" },
-  async ({ event, step }) => {
-    // Fetching video
-    await step.sleep("fetching", "3s");
-    // Transcribing video
-    await step.sleep("transcribing", "3s");
-    // Sending transcription to Open AI for example
-    await step.sleep("sending-to-AI ", "3s");
-  
-    await step.run("create-workflow", async () => {
-      return prisma.workflow.create({
-      data: {
-        name: "workflow-from-inngest"
-      },
-    });
-    });
+import { inngest } from "@/inngest/client";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { generateText } from "ai";
+import { createOpenAI } from '@ai-sdk/openai';
+import { createAnthropic } from '@ai-sdk/anthropic';
+
+const google = createGoogleGenerativeAI();
+const openai = createOpenAI();
+const anthropic = createAnthropic();
+
+
+
+export const execute = inngest.createFunction(
+  { id: "execute" },
+  { event: "execute/ai" },
+  async ({ step }) => {
+    const { steps: geminiSteps } = await step.ai.wrap("gemini-generate-text", generateText, 
+    {
+      model: google("gemini-2.5-flash"),
+      system: "You are a helpful assistant that can answer questions and help with tasks.",
+      prompt: "What is the capital of Kenya?",
+    }
+  );
+    const { steps: openaiSteps } = await step.ai.wrap("openai-generate-text", generateText, 
+    {
+      model: openai("gpt-4o"),
+      system: "You are a helpful assistant that can answer questions and help with tasks.",
+      prompt: "What is the capital of Canada?",
+    }
+  );
+    const { steps: anthropicSteps } = await step.ai.wrap("anthropic-generate-text", generateText, 
+    {
+      model: anthropic("claude-sonnet-4-5"),
+      system: "You are a helpful assistant that can answer questions and help with tasks.",
+      prompt: "What is the capital of Croatia?",
+    }
+  );
+
+    return {
+      geminiSteps,
+      openaiSteps,
+      anthropicSteps,
+    }
   },
 );
