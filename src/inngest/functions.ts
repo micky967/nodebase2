@@ -4,6 +4,7 @@ import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { createOpenAI } from '@ai-sdk/openai';
 import { createAnthropic } from '@ai-sdk/anthropic';
+import * as Sentry from "@sentry/nextjs";
 
 const google = createGoogleGenerativeAI();
 const openai = createOpenAI();
@@ -15,11 +16,19 @@ export const execute = inngest.createFunction(
   { id: "execute" },
   { event: "execute/ai" },
   async ({ step }) => {
+
+    Sentry.logger.info('User triggered test log', { log_source: 'Manjits deliberaate test error log' })
+  
     const { steps: geminiSteps } = await step.ai.wrap("gemini-generate-text", generateText, 
     {
       model: google("gemini-2.5-flash"),
       system: "You are a helpful assistant that can answer questions and help with tasks.",
-      prompt: "What is the capital of Kenya?",
+      prompt: "Tell me a joke",
+      experimental_telemetry: {
+        isEnabled: true,
+        recordInputs: true,
+        recordOutputs: true,
+  },
     }
   );
     const { steps: openaiSteps } = await step.ai.wrap("openai-generate-text", generateText, 
@@ -27,20 +36,30 @@ export const execute = inngest.createFunction(
       model: openai("gpt-4o"),
       system: "You are a helpful assistant that can answer questions and help with tasks.",
       prompt: "What is the capital of Canada?",
+      experimental_telemetry: {
+        isEnabled: true,
+        recordInputs: true,
+        recordOutputs: true,
+  },
     }
   );
-    const { steps: anthropicSteps } = await step.ai.wrap("anthropic-generate-text", generateText, 
-    {
-      model: anthropic("claude-sonnet-4-5"),
-      system: "You are a helpful assistant that can answer questions and help with tasks.",
-      prompt: "What is the capital of Croatia?",
-    }
-  );
+  //   const { steps: anthropicSteps } = await step.ai.wrap("anthropic-generate-text", generateText, 
+  //   {
+  //     model: anthropic("claude-sonnet-4-5"),
+  //     system: "You are a helpful assistant that can answer questions and help with tasks.",
+  //     prompt: "What is the capital of Croatia?",
+  //     experimental_telemetry: {
+  //       isEnabled: true,
+  //       recordInputs: true,
+  //       recordOutputs: true,
+  // },
+  //   }
+  // );
 
     return {
       geminiSteps,
       openaiSteps,
-      anthropicSteps,
+      // anthropicSteps,
     }
   },
 );
