@@ -17,7 +17,7 @@ export const execute = inngest.createFunction(
   { event: "execute/ai" },
   async ({ step }) => {
 
-    Sentry.logger.info('User triggered test log', { log_source: 'Manjits deliberaate test error log' })
+    Sentry.logger.info('User triggered test log', { log_source: 'Play up Pompey Error Log' })
   
     const { steps: geminiSteps } = await step.ai.wrap("gemini-generate-text", generateText, 
     {
