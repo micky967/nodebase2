@@ -2,6 +2,7 @@
 
 import {
   CreditCardIcon,
+  DollarSignIcon,
   FolderOpenIcon,
   HistoryIcon,
   KeyIcon,
@@ -27,7 +28,7 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useHasActiveSubscription } from "@/features/subscriptions/hooks/use-subscription";
-import { cn } from "@/lib/utils";
+
 
 const menuItems = [
   {
@@ -48,6 +49,11 @@ const menuItems = [
         icon: HistoryIcon,
         url: "/executions",
       },
+      {
+        title: "Subscriptions",
+        icon: DollarSignIcon,
+        url: "/subscription",
+      },
     ],
   },
 ];
@@ -55,7 +61,7 @@ const menuItems = [
 export const AppSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const { hasActiveSubscription, isLoading, subscription } = useHasActiveSubscription();
+  const { hasActiveSubscription, isLoading } = useHasActiveSubscription();
 
   return (
     <Sidebar collapsible="icon">
@@ -128,6 +134,8 @@ export const AppSidebar = () => {
               <span>Billing Portal</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
+
+
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="Logout"
