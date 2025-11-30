@@ -5,7 +5,6 @@ import { useTRPC } from "@/trpc/client";
 import { useMutation } from "@tanstack/react-query";
 import { SparklesIcon } from "lucide-react";
 import { toast } from "sonner";
-import { motion } from "motion/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
@@ -37,18 +36,16 @@ const Page = () => {
     })
   );
   return (
-    <div className="flex p-4 justify-center items-center h-screen">
-      <motion.button
-        whileHover={{
-          scale: 1.02,
-        }}
+    <div className="flex p-4 justify-center items-center h-screen max-h-[calc(100vh-64px)]">
+      <button
         onClick={() => testAi.mutate()}
         disabled={testAi.isPending}
-        className="w-[300px] bg-linear-to-r from-primary/80 to red-500 rounded-2xl to-red-500 font-semibold flex items-center justify-center h-10 text-white origin-center"
+        type="button"
+        className="w-[300px] bg-linear-to-r from-primary to-red-500 rounded-2xl font-semibold flex items-center justify-center h-10 text-white hover:scale-105 transition-all duration-300"
       >
         <SparklesIcon className="size-4 mr-4 text-white" />
         Click to test subscription
-      </motion.button>
+      </button>
     </div>
   );
 };
